@@ -13,6 +13,7 @@ public class Mover : MonoBehaviour
         {
             MoveToClickedPoint();
         }
+        UpdatePlayerAnimation();
     }
 
     private void MoveToClickedPoint() 
@@ -26,5 +27,14 @@ public class Mover : MonoBehaviour
             GetComponent<NavMeshAgent>().destination = hit.point;
         }
 
+    }
+
+    private void UpdatePlayerAnimation() 
+    {
+        // USING LOCAL SPEED TO USE IN THE ANIMATION BLEND TREE, WE DONT NEED THE WORLD SPACE INFO HENCE INVERSETRANSFORMDIRECTION...
+        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+        float speed = localVelocity.z;
+        GetComponent<Animator>().SetFloat("forwardSpeed", speed);
     }
 }
