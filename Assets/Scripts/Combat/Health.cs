@@ -8,6 +8,11 @@ namespace RPG.Combat
         
         bool isDead = false;
 
+        public bool IsDead()
+        {
+            return isDead;
+        }
+
         public void TakeDamage(float damage)
         {
             healthPoints = Mathf.Max(healthPoints - damage, 0);
@@ -17,7 +22,7 @@ namespace RPG.Combat
             }
         }
 
-        private  void Die()
+        private void Die()
         {
             if(isDead) return;
             isDead = true;
